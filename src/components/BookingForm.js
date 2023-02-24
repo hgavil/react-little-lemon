@@ -3,19 +3,20 @@ import {useState} from "react";
 export function BookingForm(props) {
 
     const [date, setDate] = useState("")
-    const [time, setTime] = useState(props.times[0])
+    const [time, setTime] = useState("")
     const [guests, setGuests] = useState(0)
     const [occasion, setOccasion] = useState("")
 
     return (
         <form id={"bookingForm"}>
+            <h3>Book Now</h3>
             <div className={"Field"}>
                 <label htmlFor={"res-date"}>Choose Date</label>
                 <input type={'date'} id={"res-date"}
                        value={date}
                        onChange={(e) => {
                            setDate(e.target.value)
-                           props.timeSet(e.target.value)
+                           props.timeSet({state: props.times, date: e.target.valueAsDate})
                        }}
                 />
             </div>
@@ -29,7 +30,7 @@ export function BookingForm(props) {
                 >
                     {props.times.map( time => {
                         return (
-                            <option>{time}</option>
+                            <option key={time}>{time}</option>
                         )
                     })}
                 </select>

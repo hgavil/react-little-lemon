@@ -3,13 +3,18 @@ import {BookingPage} from "./BookingPage";
 import {HomePage} from "./HomePage";
 import {Route, Routes} from "react-router-dom";
 import {useReducer, useState} from "react";
+import {fetchAPI, submitAPI} from "../apiFunctions";
 
-function updateTimes(date) {
-    return(['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'])
+
+export function updateTimes(state, date) {
+    const newTimes = fetchAPI(date.date)
+    return newTimes;
 }
 
-function initializeTimes() {
-    return(['17:00', '18:00', '19:00', '20:00', '21:00', '22:00'])
+export function initializeTimes() {
+    const todayDate = new Date();
+    const initialTimes = fetchAPI(todayDate)
+    return(initialTimes)
 }
 
 export function Main() {
