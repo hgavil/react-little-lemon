@@ -1,5 +1,6 @@
 import './App.css';
 import { ChakraProvider } from '@chakra-ui/react'
+
 import {Header} from "./components/Header";
 import {Nav} from "./components/Nav";
 import {Main} from "./components/Main";
