@@ -15,7 +15,7 @@ export function CallToAction() {
                 <p>
                     We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
                 </p>
-                <button className={"submitButton"} onClick={handleClick}>Reserve a table</button>
+                <button className={"submitButton"} onClick={handleClick} aria-label={"On Click"}>Reserve a table</button>
             </div>
             <img id={"heroImage"} src={require('../assets/restaurantfood.jpg')} alt={"food on a plate"}/>
         </div>

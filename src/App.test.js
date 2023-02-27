@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import App from './App';
 import {BookingForm} from "./components/BookingForm";
 import {initializeTimes, Main, updateTimes} from "./components/Main";
@@ -27,4 +27,21 @@ test('Validates that updateTimes returns the same value provided in the state', 
   const timeUpdate = updateTimes(initialState, date)
 
   expect(timeUpdate).toEqual(initialState)
+})
+
+test('Validate the forms', () => {
+  render (<BookingForm times={['0']}/>, {wrapper: BrowserRouter});
+
+  const dateInput = screen.getByLabelText("res-date")
+  expect(dateInput).toBeInvalid()
+
+  const timeInput = screen.getByLabelText("res-time")
+  expect(timeInput).toBeValid()
+
+  const guestsInput = screen.getByLabelText("guests")
+  expect(guestsInput).toBeInvalid()
+
+  fireEvent.change(guestsInput, {target: {value: '5'}})
+  expect(guestsInput).toBeValid()
+
 })

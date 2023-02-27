@@ -31,21 +31,23 @@ export function BookingForm(props) {
             <h3>Book Now</h3>
             <div className={"Field"}>
                 <label htmlFor={"res-date"}>Choose Date</label>
-                <input type={'date'} id={"res-date"}
+                <input type={'date'} id={"res-date"} aria-label={"res-date"}
                        value={date}
                        onChange={(e) => {
                            setDate(e.target.value)
                            props.timeSet({state: props.times, date: e.target.valueAsDate})
                        }}
+                       required
                 />
             </div>
             <div className={"Field"}>
                 <label htmlFor={"res-time"}>Choose Time</label>
-                <select id={"res-time"}
+                <select id={"res-time"} aria-label={"res-time"}
                         value={time}
                         onChange={(e) => {
                             setTime(e.target.value)
                         }}
+                        required
                 >
                     {props.times.map( time => {
                         return (
@@ -56,11 +58,13 @@ export function BookingForm(props) {
             </div>
             <div className={"Field"}>
                 <label htmlFor={"guests"}>Number of Guests</label>
-                <input type={'number'} placeholder={'1'} min={'1'} max={'10'} id={'guests'}
+                <input type={'number'} placeholder={'1'} min={'1'} max={'10'} id={'guests'} aria-label={'guests'}
                        value={guests}
                        onChange={(e) => {
                            setGuests(e.target.value)
                        }}
+                       required
+                       minLength={1}
                 />
             </div>
             <div className={"Field"}>
@@ -77,7 +81,7 @@ export function BookingForm(props) {
                 </select>
             </div>
             <div>
-                <button className={'submitButton'} type={'submit'}>Find a table</button>
+                <button aria-label={"Submit"} className={'submitButton'} type={'submit'} disabled={!date || !time || !guests}>Submit</button>
             </div>
         </form>
     )
