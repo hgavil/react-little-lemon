@@ -2,8 +2,9 @@ import '../styles/styles.css'
 import {BookingPage} from "./BookingPage";
 import {HomePage} from "./HomePage";
 import {Route, Routes} from "react-router-dom";
-import {useReducer, useState} from "react";
+import {useReducer} from "react";
 import {fetchAPI, submitAPI} from "../apiFunctions";
+import {ConfirmedBooking} from "./ConfirmedBooking";
 
 
 export function updateTimes(state, date) {
@@ -17,6 +18,10 @@ export function initializeTimes() {
     return(initialTimes)
 }
 
+export function submitForm(formData) {
+    return (submitAPI(formData))
+}
+
 export function Main() {
     const [availableTimes, setAvailableTimes] = useReducer(updateTimes, initializeTimes())
 
@@ -24,10 +29,9 @@ export function Main() {
         <main>
             <Routes>
                 <Route path="/" element={<HomePage/>}></Route>
-                <Route path="/booking" element={<BookingPage timeState={availableTimes} timeStateSetter={setAvailableTimes}/>}></Route>
+                <Route path="/booking" element={<BookingPage timeState={availableTimes} timeStateSetter={setAvailableTimes} submit={submitForm}/>}></Route>
+                <Route path="/confirmedbooking" element={<ConfirmedBooking/>}></Route>
             </Routes>
-            {/*<HomePage/>*/}
-            {/*<BookingPage/>*/}
             <div id={'stripe'}></div>
         </main>
     )

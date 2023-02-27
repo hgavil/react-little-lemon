@@ -1,4 +1,12 @@
+import {redirect} from "react-router-dom";
+
 export function CallToAction() {
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        redirect("/booking")
+    }
+
     return (
         <div className={"hStack"}>
             <div className={"vStack darkBgText"} id={"heroText"}>
@@ -7,7 +15,7 @@ export function CallToAction() {
                 <p>
                     We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.
                 </p>
-                <button className={"submitButton"}>Reserve a table</button>
+                <button className={"submitButton"} onClick={handleClick}>Reserve a table</button>
             </div>
             <img id={"heroImage"} src={require('../assets/restaurantfood.jpg')} alt={"food on a plate"}/>
         </div>

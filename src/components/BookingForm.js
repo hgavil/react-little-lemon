@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export function BookingForm(props) {
 
@@ -7,8 +8,26 @@ export function BookingForm(props) {
     const [guests, setGuests] = useState(0)
     const [occasion, setOccasion] = useState("")
 
+    const navigate = useNavigate()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const formData = {
+            date: date,
+            time: time,
+            guests: guests,
+            occasion: occasion
+        }
+
+
+        if (props.submit(formData)) {
+            navigate('/confirmedbooking')
+        }
+    }
+
     return (
-        <form id={"bookingForm"}>
+        <form id={"bookingForm"} onSubmit={handleSubmit}>
             <h3>Book Now</h3>
             <div className={"Field"}>
                 <label htmlFor={"res-date"}>Choose Date</label>
